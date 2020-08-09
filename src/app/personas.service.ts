@@ -5,8 +5,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 @Injectable()
 export class PersonasService {
     personas: Persona[] = [
-        new Persona("Juan", "Perez"),
-        new Persona("Laura", "Juarez")
+        new Persona('Juan', 'Perez'),
+        new Persona('Laura', 'Juarez')
     ];
 
     saludar = new EventEmitter<number>();
@@ -14,7 +14,7 @@ export class PersonasService {
     constructor(private loggingService: LoggingService) { }
 
     agregarPersona(persona: Persona) {
-        this.loggingService.enviaMensajeAConsola("agregamos persona:" + persona.nombre);
+        this.loggingService.enviaMensajeAConsola('agregamos persona:' + persona.nombre);
         this.personas.push(persona);
     }
 
@@ -25,5 +25,9 @@ export class PersonasService {
 
     modificarPersona(index: number, persona: Persona): void {
         this.personas[index] = persona;
+    }
+
+    eliminarPersona(index: number): void {
+        this.personas.splice(index, 1);
     }
 }
