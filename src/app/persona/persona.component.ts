@@ -8,16 +8,15 @@ import { PersonasService } from '../personas.service';
   styleUrls: ['./persona.component.css']
 })
 export class PersonaComponent implements OnInit {
-
   @Input() persona: Persona;
   @Input() indice: number;
 
   constructor(private personasService: PersonasService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  emitirSaludo(): void {
+  emitirSaludo(){
     this.personasService.saludar.emit(this.indice);
   }
 

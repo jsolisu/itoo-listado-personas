@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Persona } from '../persona.model';
+import { LoggingService } from '../LoggingService.service';
 import { PersonasService } from '../personas.service';
 
 @Component({
@@ -9,22 +10,21 @@ import { PersonasService } from '../personas.service';
 })
 export class FormularioComponent implements OnInit {
 
-  @ViewChild('nombreInput') nombreInput: ElementRef;
-  @ViewChild('apellidoInput') apellidoInput: ElementRef;
+  nombreInput:string;
+  apellidoInput:string;
+  
+  constructor(private loggingService:LoggingService,
+              private personasService:PersonasService ) { 
+                this.personasService.saludar.subscribe(
+                  (indice: number) => alert("El indice es: " + indice) 
+                );
+              }
 
-  constructor(private personaService: PersonasService) {
-    this.personaService.saludar.subscribe((indice: number) => {
-      alert('El indice es: ' + (indice + 1));
-    });
+  ngOnInit() {
   }
 
-  ngOnInit(): void {
+  onAgregarPersona(){
+    let persona1 = new Persona(this.nombreInput, this.apellidoInput);
+    this.personasService.agregarPersona(persona1);  
   }
-
-  onAgregarPersona(): void {
-    const persona = new Persona(this.nombreInput.nativeElement.value,
-      this.apellidoInput.nativeElement.value);
-    this.personaService.agregarPersona(persona);
-  }
-
 }
