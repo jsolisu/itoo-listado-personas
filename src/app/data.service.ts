@@ -16,4 +16,8 @@ export class DataService {
             }
         );
     }
+
+    cargarPersonas() {
+        return this.httpClient.get('https://listado-personas-1ee1c.firebaseio.com/personas.json');
+    }
 }

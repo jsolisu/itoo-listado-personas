@@ -5,18 +5,28 @@ import { DataService } from './data.service';
 
 @Injectable()
 export class PersonasService {
-    personas: Persona[] = [
-        new Persona('Juan', 'Perez'),
-        new Persona('Laura', 'Juarez')
-    ];
+    personas: Persona[] = [];
 
     saludar = new EventEmitter<number>();
 
     constructor(private loggingService: LoggingService, private dataService: DataService) { }
 
+    setPersonas(personas: Persona[]) {
+        this.personas = personas;
+    }
+
+    obtenerPersonas() {
+        return this.dataService.cargarPersonas();
+    }
+
     agregarPersona(persona: Persona) {
         this.loggingService.enviaMensajeAConsola('agregamos persona:' + persona.nombre);
+
+        if (this.personas == null) {
+            this.personas = [];
+        }
         this.personas.push(persona);
+
         this.dataService.guardarPersonas(this.personas);
     }
 
