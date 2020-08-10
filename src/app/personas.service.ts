@@ -37,6 +37,7 @@ export class PersonasService {
 
     modificarPersona(index: number, persona: Persona): void {
         this.personas[index] = persona;
+        this.dataService.modificarPersona(index, persona);
     }
 
     eliminarPersona(index: number): void {
